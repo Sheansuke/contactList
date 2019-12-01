@@ -1,0 +1,71 @@
+<aside class="container">
+  <header class="contactsHeader">
+    <h1>Contacts: {{ contactsCount }}</h1>
+  </header>
+
+  <!-- container to contacts -->
+  <div>
+    <mat-list>
+      <mat-list-item *ngFor="let contacts of list" class="contactContainerLi">
+        <img matListAvatar src="{{ contacts.imgUrl }}" alt="..." />
+        <h3 matLine>{{ contacts.name }}</h3>
+        <p matLine>
+          <span> {{ contacts.ocupation }} </span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- float icon press to open "add contacts container" -->
+  <mat-icon
+    (click)="isAddContact = !isAddContact"
+    aria-hidden="false"
+    aria-label="Example home icon"
+    class="addContact"
+    >add_circle</mat-icon
+  >
+</aside>
+
+<!-- Container to add new contacts ---------------------------------------------------------------------------->
+<div class="container__addContact" [@openAddContact]="isAddContact">
+  <h3>Add New Friends!</h3>
+
+  <!-- inputs container -->
+  <div class="addContactInputContainer">
+    <!-- name -->
+    <mat-form-field class="example-full-width">
+      <input [(ngModel)]="newContact.name" matInput placeholder="Name" />
+    </mat-form-field>
+
+    <!-- ocupation -->
+    <mat-form-field class="example-full-width">
+      <input
+        [(ngModel)]="newContact.ocupation"
+        matInput
+        placeholder="Ocupation"
+      />
+    </mat-form-field>
+
+    <!-- image Url -->
+    <mat-form-field class="example-full-width">
+      <textarea
+        [(ngModel)]="newContact.imgUrl"
+        matInput
+        placeholder="Image Url"
+      ></textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- buttons container -->
+  <div class="addContactButtonContainer">
+    <!-- cancel -->
+    <button (click)="isAddContact = !isAddContact" mat-flat-button color="warn">
+      Closed
+    </button>
+
+    <!-- Add -->
+    <button (click)="addNewContact(newContact)" mat-flat-button color="accent">
+      Add
+    </button>
+  </div>
+</div>

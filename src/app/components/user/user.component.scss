@@ -1,0 +1,106 @@
+//Main container
+.container {
+  position: relative;
+  border: 0px solid transparent;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  background-color: white; //#242A31
+  width: 310px;
+  height: 100vh;
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.5);
+  float: left;
+
+  //Contacts Container
+  div {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+  }
+}
+
+//contains the header, with the contacts and their count
+.contactsHeader {
+  border: 0px solid transparent;
+  border-radius: 4px 4px 0px 0px;
+  color: black;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  width: 100%;
+  height: 60px;
+  h1 {
+    font-size: 25px;
+    margin-left: 10px;
+  }
+}
+
+//Element that contains each individual contact
+.contactContainerLi {
+  margin-bottom: 5px;
+
+  &:hover {
+    background-color: rgba(36, 42, 49, 0.2);
+    cursor: pointer;
+  }
+
+  h3 {
+    color: black;
+    font-weight: bold;
+  }
+
+  p span {
+    color: #777b7f;
+  }
+}
+
+//Button to open window that add new contacts
+.addContact {
+  color: rgba(36, 42, 49, 0.664);
+  position: absolute;
+  right: 55px;
+  bottom: 50px;
+  font-size: 3.5em;
+  border: 0px solid transparent;
+  border-radius: 50%;
+
+  &:hover {
+    color: #242a31;
+    cursor: pointer;
+  }
+}
+
+//CONTAINER ADDCONTACT-------------------------------------------------------------------------------
+.container__addContact {
+  position: absolute;
+  background-color: white;
+  width: 500px;
+  height: 400px;
+  left: 310px;
+  bottom: 0;
+  float: left;
+  transition-duration: 2s;
+  padding-left: 15px;
+
+  z-index: -100;
+  //inputs
+  .example-full-width {
+    width: 90%;
+  }
+}
+
+//Buttons container
+.addContactButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-left: -50px;
+
+  button {
+    padding: 5px;
+    width: 100px;
+    margin-top: 20px;
+    &:hover {
+      filter: brightness(150%);
+    }
+  }
+}
