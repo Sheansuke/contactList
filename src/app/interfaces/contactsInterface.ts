@@ -1,7 +1,12 @@
 
 //contacts interface
 export interface contactsInterface {
+  index?:number;
   name: string;
-  ocupation: string;
-  imgUrl: string;
+  email: string;
+  phone: string;
+}
+
+enum Index {
+  index
 }

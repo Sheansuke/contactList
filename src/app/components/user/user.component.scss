@@ -6,24 +6,23 @@
   display: flex;
   flex-direction: column;
   background-color: white; //#242A31
-  width: 310px;
+  width: 350px;
   height: 100vh;
   box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.5);
-  float: left;
 
   //Contacts Container
-  div {
+  .containerContactsScroll {
     overflow-y: scroll;
-    overflow-x: hidden;
     height: 100%;
   }
 }
 
 //contains the header, with the contacts and their count
 .contactsHeader {
+  background-color: #57606f;
   border: 0px solid transparent;
   border-radius: 4px 4px 0px 0px;
-  color: black;
+  color: white;
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -52,6 +51,34 @@
   p span {
     color: #777b7f;
   }
+
+  h5 {
+    width: 50%;
+
+    text-align: right;
+  }
+
+  //icons styles
+  .icons {
+    margin-top: 10px;
+
+    .iconEdit,
+    .iconDelete {
+      font-size: 1.5em;
+    }
+
+    .iconEdit {
+      &:hover {
+        color: green;
+      }
+    }
+
+    .iconDelete {
+      &:hover {
+        color: red;
+      }
+    }
+  }
 }
 
 //Button to open window that add new contacts
@@ -76,7 +103,7 @@
   background-color: white;
   width: 500px;
   height: 400px;
-  left: 310px;
+  left: 350px;
   bottom: 0;
   float: left;
   transition-duration: 2s;
@@ -103,4 +130,10 @@
       filter: brightness(150%);
     }
   }
+}
+
+//CONTAINER EDITCONTACT-------------------------------------------------------------------------------
+.container__editContact {
+  @extend .container__addContact;
+  top: 0;
 }

@@ -1,17 +1,47 @@
 <aside class="container">
   <header class="contactsHeader">
-    <h1>Contacts: {{ contactsCount }}</h1>
+    <h1>Contacts: {{ list.length }}</h1>
   </header>
 
   <!-- container to contacts -->
-  <div>
+  <div class="containerContactsScroll">
     <mat-list>
-      <mat-list-item *ngFor="let contacts of list" class="contactContainerLi">
-        <img matListAvatar src="{{ contacts.imgUrl }}" alt="..." />
+      <mat-list-item
+        id="contactList"
+        *ngFor="let contacts of list"
+        class="contactContainerLi"
+        (click)="selectContact(contacts)"
+      >
         <h3 matLine>{{ contacts.name }}</h3>
         <p matLine>
-          <span> {{ contacts.ocupation }} </span>
+          <span> {{ contacts.email }} </span>
         </p>
+
+        <h5>
+          {{ contacts.phone }}
+
+          <!-- edit icon -->
+          <div class="icons">
+            <mat-icon
+              (click)="editContact()"
+              (click)="isEditContact = true"
+              (click)="isAddContact = false"
+              aria-hidden="false"
+              aria-label="Example home icon"
+              class="iconEdit"
+              >edit</mat-icon
+            >
+
+            <!-- delete icon -->
+            <mat-icon
+              (click)="removeContact()"
+              aria-hidden="false"
+              aria-label="Example home icon"
+              class="iconDelete"
+              >delete</mat-icon
+            >
+          </div>
+        </h5>
       </mat-list-item>
     </mat-list>
   </div>
@@ -19,6 +49,7 @@
   <!-- float icon press to open "add contacts container" -->
   <mat-icon
     (click)="isAddContact = !isAddContact"
+    (click)="isEditContact = false"
     aria-hidden="false"
     aria-label="Example home icon"
     class="addContact"
@@ -26,46 +57,102 @@
   >
 </aside>
 
+
+
+
 <!-- Container to add new contacts ---------------------------------------------------------------------------->
 <div class="container__addContact" [@openAddContact]="isAddContact">
-  <h3>Add New Friends!</h3>
+    <h3>Add New Friends!</h3>
+  
+    <!-- inputs container -->
+    <div class="addContactInputContainer">
+      <!-- name -->
+      <mat-form-field class="example-full-width">
+        <input
+          [(ngModel)]="newContact.name"
+          matInput
+          placeholder="Name"
+          formnovalidate="name"
+          required
+        />
+      </mat-form-field>
+  
+      <!-- email -->
+      <mat-form-field class="example-full-width">
+        <input
+          type="email"
+          [(ngModel)]="newContact.email"
+          matInput
+          placeholder="Email"
+        />
+      </mat-form-field>
+  
+      <!-- phone -->
+      <mat-form-field class="example-full-width">
+        <input [(ngModel)]="newContact.phone" matInput placeholder="Phone" />
+      </mat-form-field>
+    </div>
+  
+    <!-- buttons container -->
+    <div class="addContactButtonContainer">
+      <!-- cancel -->
+      <button (click)="isAddContact = !isAddContact" mat-flat-button color="warn">
+        Closed
+      </button>
+  
+      <!-- Add -->
+      <button (click)="addNewContact(newContact)" mat-flat-button color="accent">
+        Add
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+
+<!-- Container to edit contacts---------------------------------------------------------------------------->
+<div class="container__editContact" [@openEditContact]="isEditContact">
+  <h3>Currently Editingt: {{ targetContact.name }}</h3>
 
   <!-- inputs container -->
   <div class="addContactInputContainer">
     <!-- name -->
     <mat-form-field class="example-full-width">
-      <input [(ngModel)]="newContact.name" matInput placeholder="Name" />
+      <input [(ngModel)]="targetContact.name" matInput placeholder="Name" />
     </mat-form-field>
 
-    <!-- ocupation -->
+    <!-- email -->
     <mat-form-field class="example-full-width">
-      <input
-        [(ngModel)]="newContact.ocupation"
-        matInput
-        placeholder="Ocupation"
-      />
+      <input [(ngModel)]="targetContact.email" matInput placeholder="Email" />
     </mat-form-field>
 
-    <!-- image Url -->
+    <!-- phone -->
     <mat-form-field class="example-full-width">
-      <textarea
-        [(ngModel)]="newContact.imgUrl"
-        matInput
-        placeholder="Image Url"
-      ></textarea>
+      <input [(ngModel)]="targetContact.phone" matInput placeholder="Phone" />
     </mat-form-field>
   </div>
 
   <!-- buttons container -->
   <div class="addContactButtonContainer">
-    <!-- cancel -->
-    <button (click)="isAddContact = !isAddContact" mat-flat-button color="warn">
+    <!-- cancel button-->
+    <button
+      (click)="cancelEdit()"
+      (click)="isEditContact = !isEditContact"
+      mat-flat-button
+      color="warn"
+    >
       Closed
     </button>
 
-    <!-- Add -->
-    <button (click)="addNewContact(newContact)" mat-flat-button color="accent">
-      Add
+    <!-- Add button -->
+    <button
+      (click)="doneContact()"
+      mat-flat-button
+      color="accent"
+    >
+      Done
     </button>
   </div>
 </div>
